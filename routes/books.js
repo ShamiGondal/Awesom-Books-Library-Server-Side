@@ -3,6 +3,7 @@ const express = require('express');
 const Book = require('../model/books');
 const multer = require('multer');
 const moment = require('moment'); 
+const fetchUser = require('../middleware/fetchUser');
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -10,7 +11,7 @@ const upload = multer({ storage: storage });
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 //.end point to fetch the rooms
-router.get('/fetchBooks', [], async (req, res) => {
+router.get('/fetchBooks', async (req, res) => {
 
   try {
 
@@ -25,7 +26,7 @@ router.get('/fetchBooks', [], async (req, res) => {
 
 
 //end point to fetch the rooms with id
-router.get('/fetchBook/:id', [], async (req, res) => {
+router.get('/fetchBook/:id', async (req, res) => {
   const id = req.params.id
   console.log(id)
   try {
@@ -59,7 +60,7 @@ router.post('/addBook', upload.single('picture'), async (req, res) => {
 
 
 //end point to like the room
-router.post('/likes/:id', [], async (req, res) => {
+router.post('/likes/:id', async (req, res) => {
   const bookId = req.params.id.replace(/["']/g, '');
 
   try {
@@ -122,7 +123,7 @@ router.delete('/deleteBook/:id', async (req, res) => {
   }
 });
 
-router.post('/payment/:id', async (req, res) => {
+router.post('/payment/:id',fetchUser, async (req, res) => {
   const bookId = req.params.id;
 
   try {
