@@ -123,9 +123,9 @@ router.delete('/deleteBook/:id', async (req, res) => {
   }
 });
 
-router.post('/payment/:id',fetchUser, async (req, res) => {
+router.post('/payment/:id', async (req, res) => {
   const bookId = req.params.id;
-
+  
   try {
     const bookDetails = await Book.findOne({ _id: bookId });
 
@@ -156,6 +156,7 @@ router.post('/payment/:id',fetchUser, async (req, res) => {
       success_url: `${process.env.CLIENT_URL}/success.html`,
       cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
     });
+    console.log(process.env.CLIENT_URL),
 
     res.json({ url: session.url });
   } catch (error) {
