@@ -2,8 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "This is the api for the hotel management system",
-  "main": "app.js",
+  "main": "app.js","engines": {
+    "node": "18.x"
+  },
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
