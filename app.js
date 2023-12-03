@@ -37,6 +37,7 @@ io.on('connection', (socket) => {
 
 
 app.use('/api/books/', require('./routes/books'));
+app.use('/api/auth/', require('./routes/authentication'));
 
 server.listen(port, () => {
   console.log(`App listening at the port http://localhost:${port}`);
